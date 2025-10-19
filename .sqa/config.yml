@@ -1,0 +1,57 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    gitlab.fing.edu.uy/proyectogrado25/pg-back:
+      branch: collaborator_module
+      credential_tmp: true
+      repo: https://gitlab.fing.edu.uy/proyectogrado25/pg-back.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      gitlab.fing.edu.uy/proyectogrado25/pg-back git:
+        commands:
+        - /usr/bin/env sh .sqa/script.crabby-pumpkin-wallaby.sh
+        container: qc.acc_homey-mustard-booby
+  QC.Doc:
+    repos:
+      gitlab.fing.edu.uy/proyectogrado25/pg-back find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.bumpy-magenta-hamster.sh
+        container: qc.doc_squirrely-bistre-newfoundland
+      gitlab.fing.edu.uy/proyectogrado25/pg-back git:
+        commands:
+        - /usr/bin/env sh .sqa/script.queasy-cerulean-greyhound.sh
+        container: qc.doc_baggy-lemon-quail
+      gitlab.fing.edu.uy/proyectogrado25/pg-back markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.slaphappy-heliotrope-crocodile.sh
+        container: qc.doc_crappy-xanthic-mouse
+  QC.Lic:
+    repos:
+      gitlab.fing.edu.uy/proyectogrado25/pg-back licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.breezy-maroon-falcon.sh
+        container: qc.lic_flaky-cyan-spitz
+  QC.Sty:
+    repos:
+      gitlab.fing.edu.uy/proyectogrado25/pg-back checkstyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.randy-chartreuse-shark.sh
+        container: qc.sty_wheezy-chartreuse-caiman
+      gitlab.fing.edu.uy/proyectogrado25/pg-back hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.sleepy-firebrick-abyssinian.sh
+        container: qc.sty_skanky-chartreuse-sloth
+  QC.Ver:
+    repos:
+      gitlab.fing.edu.uy/proyectogrado25/pg-back get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.lousy-violet-collie.sh
+        container: qc.ver_droopy-teal-dalmatian
+timeout: 5400
